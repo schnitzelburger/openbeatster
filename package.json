@@ -1,0 +1,15 @@
+{
+  "name": "openbeatster-web-app",
+  "version": "1.0.0",
+  "description": "A web application for scanning Spotify QR codes and playing tracks using the Spotify Web Playback SDK",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html5-qrcode": "^2.3.8"
+  }
+}

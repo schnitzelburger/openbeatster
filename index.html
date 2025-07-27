@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>openbeatster</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>openbeatster</h1>
+      
+      <div id="spotify-status">
+        <strong>Spotify Status:</strong> 
+        <span id="status-text">Loading...</span>
+        <button id="reset-auth">Login Again</button>
+      </div>
+      
+      <div id="camera-selection" style="display: none;">
+        <label for="camera-select">Select Camera:</label>
+        <select id="camera-select">
+          <option value="">Loading cameras...</option>
+        </select>
+        <button id="use-selected-camera">Use Selected Camera</button>
+      </div>
+      
+      <button id="startButton">Select Camera First</button>
+      
+      <div id="qr-scanner"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+/* Mobile-First Responsive Design */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  padding: 10px;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin: 20px 0 30px 0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Status Box */
+#spotify-status {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  text-align: center;
+  max-width: 400px;
+}
+
+#spotify-status strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#status-text {
+  display: block;
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(45deg, #1db954, #1ed760);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  min-height: 50px;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  display: block;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#reset-auth {
+  background: linear-gradient(45deg, #ff6b6b, #ff5252);
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  margin-top: 15px;
+  max-width: 150px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+#reset-auth:hover {
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* Main Scan Button */
+#startButton {
+  font-size: 1.3rem;
+  padding: 20px 30px;
+  margin: 30px auto;
+  background: linear-gradient(45deg, #2196f3, #21cbf3);
+  box-shadow: 0 6px 25px rgba(33, 150, 243, 0.3);
+}
+
+/* Camera Selection */
+#camera-selection {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  text-align: center;
+  max-width: 400px;
+}
+
+#camera-selection label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+#camera-select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  background: white;
+  color: #333;
+  min-height: 50px;
+}
+
+#camera-select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+#use-selected-camera {
+  background: linear-gradient(45deg, #ff9800, #f57c00);
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+#use-selected-camera:hover {
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+}
+
+/* QR Scanner */
+#qr-scanner {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  max-width: 350px;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* QR Scanner Video Element */
+#qr-scanner video {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+#qr-scanner canvas {
+  border-radius: 10px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  body {
+    padding: 5px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin: 15px 0 20px 0;
+  }
+  
+  #spotify-status,
+  #camera-selection {
+    margin: 15px auto;
+    padding: 15px;
+    max-width: 95%;
+  }
+  
+  button {
+    font-size: 1rem;
+    padding: 12px 20px;
+    max-width: 280px;
+  }
+  
+  #startButton {
+    font-size: 1.2rem;
+    padding: 18px 25px;
+    margin: 20px auto;
+  }
+  
+  #qr-scanner {
+    max-width: 95%;
+    padding: 15px;
+    min-height: 250px;
+  }
+  
+  #camera-select {
+    padding: 10px 12px;
+    min-height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+    margin: 10px 0 15px 0;
+  }
+  
+  #spotify-status,
+  #camera-selection {
+    margin: 10px 5px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  
+  button {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    max-width: 100%;
+    margin: 8px auto;
+  }
+  
+  #startButton {
+    font-size: 1.1rem;
+    padding: 15px 20px;
+    margin: 15px auto;
+  }
+  
+  #qr-scanner {
+    margin: 10px 5px;
+    padding: 10px;
+    min-height: 200px;
+    border-radius: 10px;
+  }
+  
+  #camera-select {
+    padding: 8px 10px;
+    min-height: 40px;
+    font-size: 0.95rem;
+  }
+  
+  #status-text {
+    font-size: 0.95rem;
+  }
+  
+  #reset-auth {
+    font-size: 0.8rem;
+    padding: 8px 15px;
+    max-width: 120px;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  h1 {
+    font-size: 1.4rem;
+    margin: 5px 0 10px 0;
+  }
+  
+  #spotify-status,
+  #camera-selection {
+    margin: 8px auto;
+    padding: 10px;
+  }
+  
+  #qr-scanner {
+    min-height: 150px;
+    margin: 8px auto;
+  }
+  
+  button {
+    padding: 8px 15px;
+    margin: 5px auto;
+  }
+  
+  #startButton {
+    padding: 12px 20px;
+    margin: 10px auto;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  button {
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+}
+
+/* Touch-friendly improvements */
+@media (pointer: coarse) {
+  button {
+    min-height: 48px;
+  }
+  
+  #camera-select {
+    min-height: 48px;
+  }
+}
+
+/* Animation for status updates */
+#status-text {
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+  
+  #spotify-status,
+  #camera-selection {
+    background: rgba(50, 50, 50, 0.95);
+    color: #f0f0f0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  #spotify-status strong,
+  #camera-selection label {
+    color: #f0f0f0;
+  }
+  
+  #camera-select {
+    background: #444;
+    color: #f0f0f0;
+    border-color: #555;
+  }
+  
+  #qr-scanner {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+}

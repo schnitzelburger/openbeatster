@@ -226,6 +226,13 @@ function startQrScanner(cameraId) {
                 console.log('Scanner stopped after QR code detection');
                 currentQrScanner = null; // Clear reference after stopping
                 
+                // Hide the QR scanner container
+                const scannerContainer = document.getElementById('qr-scanner');
+                if (scannerContainer) {
+                    scannerContainer.style.display = 'none';
+                    scannerContainer.innerHTML = ''; // Clear content
+                }
+                
                 // Remove loading animation
                 const statusText = document.getElementById('status-text');
                 if (statusText) {
@@ -257,6 +264,12 @@ function startQrScanner(cameraId) {
             startButton.disabled = false;
         }
         
+        // Hide scanner container on error
+        const scannerContainer = document.getElementById('qr-scanner');
+        if (scannerContainer) {
+            scannerContainer.style.display = 'none';
+        }
+        
         currentQrScanner = null;
     });
 }
@@ -267,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const useSelectedCameraButton = document.getElementById('use-selected-camera');
     const cameraSelect = document.getElementById('camera-select');
     const resetAuthButton = document.getElementById('reset-auth');
+    const playPauseButton = document.getElementById('playPauseButton');
     
     console.log('Found startButton:', startButton);
     
@@ -279,6 +293,13 @@ document.addEventListener('DOMContentLoaded', function() {
     startButton.disabled = true;
     startButton.textContent = 'Select Camera First';
     startButton.style.opacity = '0.6';
+
+    // Initialize play/pause button state
+    if (playPauseButton) {
+        playPauseButton.disabled = true;
+        playPauseButton.style.opacity = '0.6';
+        playPauseButton.textContent = '▶️ Play';
+    }
 
     // Load cameras on page load and show camera selection immediately
     console.log('Loading available cameras...');
@@ -360,6 +381,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.selectedCameraId) {
             console.log('Starting scanner with selected camera:', window.selectedCameraId);
             
+            // Show and prepare the QR scanner container
+            let scannerContainer = document.getElementById('qr-scanner');
+            scannerContainer.style.display = 'flex';
+            scannerContainer.innerHTML = ''; // Clear any previous content
+            
             // Disable button during scanning to prevent multiple clicks
             this.textContent = 'Scanning...';
             this.disabled = true;
@@ -389,12 +415,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Event Listener for Play/Pause Button
+    if (playPauseButton) {
+        playPauseButton.addEventListener('click', function() {
+            if (this.disabled) {
+                return; // Button is disabled, no track loaded
+            }
+            
+            console.log('Play/Pause button clicked');
+            
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            togglePlayPause();
+        });
+    }
+    
     console.log('Event listeners added');
 });
 
 let spotifyPlayer = null;
 let spotifyDeviceId = null;
 let spotifyAccessToken = null;
+let isPlaying = false;
+let currentTrackUri = null;
 
 function initializeSpotifyPlayer(accessToken) {
     console.log('Initializing Spotify Player...');
@@ -423,6 +470,14 @@ function initializeSpotifyPlayer(accessToken) {
             volume: 0.8
         });
 
+        spotifyPlayer.addListener('player_state_changed', (state) => {
+            if (state) {
+                isPlaying = !state.paused;
+                currentTrackUri = state.track_window.current_track.uri;
+                updatePlayPauseButton();
+            }
+        });
+        
         spotifyPlayer.addListener('ready', ({ device_id }) => {
             spotifyDeviceId = device_id;
             console.log('Spotify Player is ready with Device ID:', device_id);
@@ -565,7 +620,7 @@ function playSpotifyTrackInternal(trackId) {
         body: JSON.stringify({ uris: [`spotify:track:${trackId}`] })
     }).then(res => {
         if (res.ok) {        console.log('Track is playing:', trackId);
-        alert('Track is playing!');
+        //alert('Track is playing!');
         } else {
             return res.json().then(data => {
                 console.error('Error playing track:', data);
@@ -582,6 +637,48 @@ function playSpotifyTrackInternal(trackId) {
         console.error('Network error playing track:', err);
         alert('Network error playing track.');
     });
+}
+
+// Play/Pause functionality
+function togglePlayPause() {
+    if (!spotifyPlayer) {
+        console.error('Spotify player not initialized');
+        alert('Spotify player not ready');
+        return;
+    }
+    
+    if (isPlaying) {
+        spotifyPlayer.pause().then(() => {
+            console.log('Playback paused');
+        }).catch(err => {
+            console.error('Error pausing:', err);
+        });
+    } else {
+        spotifyPlayer.resume().then(() => {
+            console.log('Playback resumed');
+        }).catch(err => {
+            console.error('Error resuming:', err);
+        });
+    }
+}
+
+function updatePlayPauseButton() {
+    const playPauseButton = document.getElementById('playPauseButton');
+    if (playPauseButton) {
+        if (currentTrackUri && isPlaying) {
+            playPauseButton.textContent = '⏸️ Pause';
+            playPauseButton.disabled = false;
+            playPauseButton.style.opacity = '1';
+        } else if (currentTrackUri && !isPlaying) {
+            playPauseButton.textContent = '▶️ Play';
+            playPauseButton.disabled = false;
+            playPauseButton.style.opacity = '1';
+        } else {
+            playPauseButton.textContent = '▶️ Play';
+            playPauseButton.disabled = true;
+            playPauseButton.style.opacity = '0.6';
+        }
+    }
 }
 
 // Token validation and refresh

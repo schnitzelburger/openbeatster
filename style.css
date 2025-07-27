@@ -54,7 +54,7 @@ h1 {
   font-weight: 500;
 }
 
-/* Buttons */
+/* Buttons - Unified Design */
 button {
   background: linear-gradient(45deg, #1db954, #1ed760);
   color: white;
@@ -82,6 +82,18 @@ button:active {
   transform: translateY(0);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button:disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+/* Special button variants */
 #reset-auth {
   background: linear-gradient(45deg, #ff6b6b, #ff5252);
   font-size: 0.9rem;
@@ -95,13 +107,36 @@ button:active {
   box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
-/* Main Scan Button */
-#startButton {
-  font-size: 1.3rem;
-  padding: 20px 30px;
-  margin: 30px auto;
-  background: linear-gradient(45deg, #2196f3, #21cbf3);
-  box-shadow: 0 6px 25px rgba(33, 150, 243, 0.3);
+#use-selected-camera {
+  background: linear-gradient(45deg, #ff9800, #f57c00);
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+#use-selected-camera:hover {
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+}
+
+/* Main action buttons - consistent size and style */
+#startButton,
+#playPauseButton {
+  font-size: 1.2rem;
+  padding: 18px 30px;
+  margin: 20px auto;
+  min-height: 55px;
+  max-width: 300px;
+}
+
+/* Playback Controls */
+#playback-controls {
+  background: transparent;
+  margin: 20px auto;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  border: none;
+  text-align: center;
+  max-width: 400px;
 }
 
 /* Camera Selection */
@@ -163,7 +198,7 @@ button:active {
   border: 1px solid rgba(255,255,255,0.2);
   max-width: 350px;
   min-height: 300px;
-  display: flex;
+  display: none; /* Initially hidden */
   align-items: center;
   justify-content: center;
 }

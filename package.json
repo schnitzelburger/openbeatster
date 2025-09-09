@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Simon Keller",
+  "license": "MIT",
   "dependencies": {
     "html5-qrcode": "^2.3.8"
   }
